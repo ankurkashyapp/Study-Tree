@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageView android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/splash_back"
+        android:scaleType="centerCrop"/>
+
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/blue_transparent">
+
+        <ImageView android:id="@+id/app_icon"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_study_tree"
+            android:scaleType="fitXY"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"/>
+
+
+        <RelativeLayout
+            android:id="@+id/welcome_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/app_icon"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp">
+
+            <TextView
+                android:id="@+id/welcome_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Welcome"
+                android:textColor="@color/white"
+                android:layout_centerHorizontal="true"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_centerVertical="true"
+                android:background="@color/grey"
+                android:layout_marginRight="5dp"
+                android:layout_toLeftOf="@+id/welcome_title" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_centerVertical="true"
+                android:background="@color/grey"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/welcome_title" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/button_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:layout_below="@+id/welcome_group"
+            android:layout_marginTop="40dp"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/user_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/white_round_corner"
+                android:text="Login"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/user_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/white_filled_round_corner"
+                android:text="Register"
+                android:textColor="@color/blue_normal"
+                android:layout_marginTop="20dp"
+                android:typeface="normal" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/study_tree_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="STUDY TREE"
+            android:textColor="@color/white"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:layout_below="@+id/button_group"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"/>
+
+        <TextView
+            android:id="@+id/study_tree_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Studying made easy"
+            android:textColor="@color/white_transparent"
+            android:layout_below="@+id/study_tree_name"
+            android:layout_centerHorizontal="true"/>
+
+        <View
+            android:layout_width="80dp"
+            android:layout_height="1dp"
+            android:background="@color/grey"
+            android:layout_below="@id/study_tree_desc"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="4dp"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

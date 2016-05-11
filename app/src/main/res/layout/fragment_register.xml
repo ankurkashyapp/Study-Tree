@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:paddingBottom="30dp">
+
+        <EditText
+            android:id="@+id/register_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black_transparent_light"
+            android:drawableLeft="@drawable/ic_user"
+            android:paddingLeft="15dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:drawablePadding="5dp"
+            android:drawableTint="@color/white_transparent"
+            android:hint="Enter your name"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white_transparent"
+            android:inputType="textPersonName"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"/>
+
+        <EditText
+            android:id="@+id/register_reg_no"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black_transparent_light"
+            android:drawableLeft="@drawable/ic_reg_no"
+            android:paddingLeft="15dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:drawablePadding="5dp"
+            android:drawableTint="@color/white_transparent"
+            android:hint="Enter reg no"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white_transparent"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            android:layout_marginTop="10dp"
+            android:inputType="numberDecimal"/>
+
+        <EditText
+            android:id="@+id/register_age"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black_transparent_light"
+            android:drawableLeft="@drawable/ic_age"
+            android:paddingLeft="15dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:drawablePadding="5dp"
+            android:drawableTint="@color/white_transparent"
+            android:hint="Enter your age"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white_transparent"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            android:layout_marginTop="10dp"
+            android:inputType="numberDecimal"/>
+
+        <EditText
+            android:id="@+id/register_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black_transparent_light"
+            android:drawableLeft="@drawable/ic_email"
+            android:paddingLeft="15dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:drawablePadding="5dp"
+            android:drawableTint="@color/white_transparent"
+            android:hint="Enter email"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white_transparent"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            android:layout_marginTop="10dp"
+            android:inputType="textEmailAddress" />
+
+        <EditText
+            android:id="@+id/register_contact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black_transparent_light"
+            android:drawableLeft="@drawable/ic_contact"
+            android:paddingLeft="15dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:drawablePadding="5dp"
+            android:drawableTint="@color/white_transparent"
+            android:hint="Enter contact no"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white_transparent"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            android:layout_marginTop="10dp"
+            android:inputType="phone"/>
+
+        <EditText
+            android:id="@+id/register_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black_transparent_light"
+            android:drawableLeft="@drawable/ic_password"
+            android:paddingLeft="15dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:drawablePadding="5dp"
+            android:drawableTint="@color/white_transparent"
+            android:hint="Enter passsword"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white_transparent"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            android:layout_marginTop="10dp"
+            android:inputType="textPassword"/>
+
+        <EditText
+            android:id="@+id/register_confirm_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black_transparent_light"
+            android:drawableLeft="@drawable/ic_password"
+            android:paddingLeft="15dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:drawablePadding="5dp"
+            android:drawableTint="@color/white_transparent"
+            android:hint="Confirm password"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white_transparent"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            android:layout_marginTop="10dp"
+            android:inputType="textPassword"/>
+
+        <Button
+            android:id="@+id/submit_registration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="REGISTER"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            android:textColor="@color/white"
+            android:background="@drawable/selector_blue_normal"
+            android:drawableRight="@drawable/ic_right_arrow"
+            android:paddingRight="30dp"
+            android:layout_marginTop="10dp"/>
+
+    </LinearLayout>
+
+</ScrollView>

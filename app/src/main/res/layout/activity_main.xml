@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_drawer">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark"
+            android:elevation="10dp"/>
+
+
+        <com.malinskiy.superrecyclerview.SuperRecyclerView
+            android:id="@+id/feeds"
+            android:layout_below="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:mainLayoutId="@layout/layout_recyclerview_verticalscroll"
+            app:layout_empty="@layout/feed_view_empty"
+            android:background="@color/grey_material_dark"
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/upload_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_add"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="left">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/drawer_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/grey_material_light"
+            android:layout_above="@+id/user_logout"
+            android:paddingBottom="5dp"/>
+
+        <Button
+            android:id="@+id/user_logout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="LOGOUT"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            android:textColor="@color/grey"
+            android:drawableRight="@drawable/ic_logout"
+            android:layout_alignParentBottom="true"
+            android:background="@color/grey_material"
+            android:paddingRight="20dp"/>
+
+    </RelativeLayout>
+
+
+</android.support.v4.widget.DrawerLayout>
