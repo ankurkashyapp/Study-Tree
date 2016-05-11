@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -113,6 +114,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         editor.putInt(User.USER_ID, Integer.parseInt(userResponse.getUser_id()));
         editor.putString(User.USER_REG_NO, userResponse.getReg_no());
         editor.putString(User.USER_NAME, userResponse.getName());
+        editor.putString(User.USER_AGE, userResponse.getAge());
+        editor.putString(User.USER_EMAIL, userResponse.getEmail());
+        editor.putString(User.USER_CONTACT, userResponse.getContact());
+        editor.putString(User.USER_PASSWORD, userResponse.getPassword());
         editor.putString(User.USER_IMAGE_LINK, userResponse.getImage_path());
         editor.commit();
     }

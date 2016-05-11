@@ -7,9 +7,12 @@ import com.mounica.studytree.api.response.Products;
 import com.mounica.studytree.api.response.UserCreatedResponse;
 import com.mounica.studytree.api.response.UserResponse;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit.Callback;
+import retrofit.http.Field;
+import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
 import retrofit.http.Multipart;
 import retrofit.http.POST;
@@ -37,4 +40,13 @@ public interface ApiCall {
 
     @GET("/show_feed.php")
     void showFeed(Callback<List<FeedResponse>> callback);
+
+    @Multipart
+    @POST("/update_profile_pic.php")
+    void updateProfilePic(@Part("image") TypedFile image, @Part("user_id") int userId, Callback<ImageUploadResponse> callback);
+
+    @FormUrlEncoded
+    @POST("/update_subjects.php")
+    void updateSubjects(@Field("user_id") int userId, @Field("subject_ids[]") ArrayList<Integer> subjectIds, Callback<MessageResponse> callback);
+
 }

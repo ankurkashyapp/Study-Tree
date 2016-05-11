@@ -33,6 +33,10 @@
             android:theme="@style/NoActionBarOverlay"
             android:parentActivityName=".activity.MainActivity"/>
 
+        <activity android:name=".activity.ProfileActivity"
+            android:label="Profile"
+            android:theme="@style/AppTheme" />
+
     </application>
 
 </manifest>

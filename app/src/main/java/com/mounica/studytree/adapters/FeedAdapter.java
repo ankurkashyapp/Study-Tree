@@ -21,6 +21,7 @@ import java.util.List;
 public class FeedAdapter extends BaseSwipeAdapter<BaseSwipeAdapter.BaseSwipeableViewHolder> {
 
     public static final String imageRootPath = "http://mink.netne.net/uploads/";
+
     private Context context;
     private List<FeedResponse> feedResponse;
 

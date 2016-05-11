@@ -123,6 +123,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
         email.setText(null);
         contact.setText(null);
         password.setText(null);
+        confirmPassword.setText(null);
     }
 
     private void showProgressDialog() {

@@ -5,13 +5,18 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.mounica.studytree.api.RestClient;
+import com.mounica.studytree.api.response.ImageUploadResponse;
 import com.mounica.studytree.api.response.MessageResponse;
 import com.mounica.studytree.api.response.UserCreatedResponse;
 import com.mounica.studytree.api.response.UserResponse;
 
+import java.io.File;
+import java.util.ArrayList;
+
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+import retrofit.mime.TypedFile;
 
 /**
  * Created by ankur on 5/5/16.
@@ -23,9 +28,14 @@ public class User {
     public static final String USER_NAME = "userName";
     public static final String USER_REG_NO = "userRegNo";
     public static final String USER_IMAGE_LINK = "userImageLink";
+    public static final String USER_AGE = "userAge";
+    public static final String USER_EMAIL = "userEmail";
+    public static final String USER_CONTACT = "userContact";
+    public static final String USER_PASSWORD = "userPassword";
 
     //public static final String USER_DEFAULT_IMAGE_LINK = "http://192.168.1.5/ankur/uploads/icon-user-default.png";
     public static final String USER_DEFAULT_IMAGE_LINK = "http://mink.netne.net/uploads/icon-user-default.png";
+    public static final String IMAGE_ROOT_PATH = "http://mink.netne.net/uploads/";
 
     public static void createUser(Context context, int regNo, String name, int age, String email, String contact, String password, final UserCreated callback) {
         RestClient.get().createUser(regNo, name, age, email, contact, password, new Callback<UserCreatedResponse>() {
@@ -64,12 +74,50 @@ public class User {
         });
     }
 
+    public static void updateProfilePic(Context context, File image, final UserProfilePicUpdate callback) {
+
+        TypedFile typedImage = new TypedFile("application/octet-stream", image);
+        int userId = User.getLoggedInUserId(context);
+        RestClient.get().updateProfilePic(typedImage, userId, new Callback<ImageUploadResponse>() {
+            @Override
+            public void success(ImageUploadResponse imageUploadResponse, Response response) {
+                if (imageUploadResponse.getError())
+                    callback.onUpdatedFailure(imageUploadResponse.getMessage());
+                else
+                    callback.onUpdatedSuccess(imageUploadResponse.getFilePath());
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                callback.onUpdatedFailure("Something went wrong. Please try again later");
+            }
+        });
+    }
+
+    public static void updateSubjects(Context context, ArrayList<Integer> subjectIds, final UserSubjectsUpdate callback) {
+        RestClient.get().updateSubjects(User.getLoggedInUserId(context), subjectIds, new Callback<MessageResponse>() {
+            @Override
+            public void success(MessageResponse messageResponse, Response response) {
+                callback.onUpdated(messageResponse.getMessage());
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                callback.onUpdated("Something went wrong. Please try again later");
+            }
+        });
+    }
+
     public static void logout(Context context, final UserLogout callback) {
         SharedPreferences credentials = context.getSharedPreferences(User.USER_CREDENTIALS, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = credentials.edit();
-        editor.putInt(User.USER_ID, -1);
-        editor.putString(User.USER_REG_NO, null);
-        editor.putString(User.USER_NAME, null);
+        editor.putInt(USER_ID, -1);
+        editor.putString(USER_REG_NO, null);
+        editor.putString(USER_NAME, null);
+        editor.putString(USER_AGE, null);
+        editor.putString(USER_EMAIL, null);
+        editor.putString(USER_CONTACT, null);
+        editor.putString(USER_PASSWORD, null);
         editor.putString(User.USER_IMAGE_LINK, null);
         editor.commit();
         callback.onLogoutSuccess();
@@ -90,6 +138,26 @@ public class User {
         return credentials.getString(USER_NAME, null);
     }
 
+    public static String getLoggedInUserAge(Context context) {
+        SharedPreferences credentials = context.getSharedPreferences(USER_CREDENTIALS, Context.MODE_PRIVATE);
+        return credentials.getString(USER_AGE, null);
+    }
+
+    public static String getLoggedInUserEmail(Context context) {
+        SharedPreferences credentials = context.getSharedPreferences(USER_CREDENTIALS, Context.MODE_PRIVATE);
+        return credentials.getString(USER_EMAIL, null);
+    }
+
+    public static String getLoggedInUserContact(Context context) {
+        SharedPreferences credentials = context.getSharedPreferences(USER_CREDENTIALS, Context.MODE_PRIVATE);
+        return credentials.getString(USER_CONTACT, null);
+    }
+
+    public static String getLoggedInUserPassword(Context context) {
+        SharedPreferences credentials = context.getSharedPreferences(USER_CREDENTIALS, Context.MODE_PRIVATE);
+        return credentials.getString(USER_PASSWORD, null);
+    }
+
     public static String getLoggedInUserImageLink(Context context) {
         SharedPreferences credentials = context.getSharedPreferences(USER_CREDENTIALS, Context.MODE_PRIVATE);
         return credentials.getString(USER_IMAGE_LINK, USER_DEFAULT_IMAGE_LINK);
@@ -108,6 +176,15 @@ public class User {
     public interface UserLogout {
         void onLogoutSuccess();
         void onLogoutFailed();
+    }
+
+    public interface UserProfilePicUpdate {
+        void onUpdatedSuccess(String path);
+        void onUpdatedFailure(String message);
+    }
+
+    public interface UserSubjectsUpdate {
+        void onUpdated(String message);
     }
 
 }

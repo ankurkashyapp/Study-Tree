@@ -18,6 +18,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -47,7 +48,7 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, DrawerViewAdapter.ProfileEditListener {
 
     private Toolbar toolbar;
     private ActionBarDrawerToggle drawerToggle;
@@ -85,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
-        DrawerViewAdapter adapter = new DrawerViewAdapter(this);
+        DrawerViewAdapter adapter = new DrawerViewAdapter(this, this);
         recyclerView.setAdapter(adapter);
     }
 
@@ -140,4 +141,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    @Override
+    public void onEditProfileClicked() {
+        drawerLayout.closeDrawer(Gravity.LEFT);
+        startActivity(new Intent(this, ProfileActivity.class));
+    }
 }

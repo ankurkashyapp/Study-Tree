@@ -5,14 +5,14 @@ package com.mounica.studytree.api.response;
  */
 public class ImageUploadResponse {
     private String message;
-    private String error;
+    private boolean error;
     private String file_path;
 
     public String getMessage() {
         return message;
     }
 
-    public String getError() {
+    public boolean getError() {
         return error;
     }
 

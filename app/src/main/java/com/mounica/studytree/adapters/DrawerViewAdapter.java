@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,19 +29,22 @@ public class DrawerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private static final int TYPE_MENU_ITEMS = 1;
 
     private Context context;
+    private ProfileEditListener profileEditListener;
 
     private int[] menuIcons = {R.drawable.ic_home, R.drawable.ic_appointment, R.drawable.ic_settings, R.drawable.ic_profile, R.drawable.ic_help};
     private String[] menuTitles = {"Home", "Appointment", "Settings", "Update Profile", "Help"};
 
-    public DrawerViewAdapter(Context context) {
+    public DrawerViewAdapter(Context context, ProfileEditListener profileEditListener) {
         this.context = context;
+        this.profileEditListener = profileEditListener;
     }
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View headerView = LayoutInflater.from(parent.getContext()).inflate(R.layout.drawer_header, parent, false);
+
         View menuItemsView = LayoutInflater.from(parent.getContext()).inflate(R.layout.drawer_menu_item_row, parent, false);
         if (viewType == TYPE_HEADER)
-            return new HeaderViewHolder(headerView);
+            return new HeaderViewHolder(headerView, profileEditListener);
 
         return new MenuItemHolder(menuItemsView);
 
@@ -55,7 +59,6 @@ public class DrawerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             String userName = User.getLoggedInUserName(context);
             String userRegNo = String.valueOf(User.getLoggedInUserRegNo(context));
 
-            Log.e("DrawerAdapter", "Image Link: "+userImageLink);
             Picasso.with(context).load(userImageLink).into(headerViewHolder.userImage);
             headerViewHolder.userName.setText(userName);
             headerViewHolder.userRegNo.setText(userRegNo);
@@ -83,12 +86,21 @@ public class DrawerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         ImageView userImage;
         TextView userName;
         TextView userRegNo;
+        Button userEditProfile;
 
-        public HeaderViewHolder(View itemView) {
+        public HeaderViewHolder(View itemView, final ProfileEditListener profileEditListener) {
             super(itemView);
             userImage = (ImageView)itemView.findViewById(R.id.user_image);
             userName = (TextView)itemView.findViewById(R.id.user_name);
             userRegNo = (TextView)itemView.findViewById(R.id.user_reg_no);
+            userEditProfile = (Button)itemView.findViewById(R.id.user_edit_profile);
+
+            userEditProfile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    profileEditListener.onEditProfileClicked();
+                }
+            });
         }
     }
 
@@ -102,5 +114,9 @@ public class DrawerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             menuIcon = (ImageView)itemView.findViewById(R.id.drawer_menu_icon);
             menuTitle = (TextView) itemView.findViewById(R.id.drawer_menu_title);
         }
+    }
+
+    public interface ProfileEditListener {
+        void onEditProfileClicked();
     }
 }

@@ -5,11 +5,6 @@ package com.mounica.studytree.api.response;
  */
 public class MessageResponse {
     private String message;
-    //private String file_path;
-
-    /*public String getFile_path() {
-        return file_path;
-    }*/
 
     public String getMessage() {
         return message;

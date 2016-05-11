@@ -12,7 +12,7 @@ public class UserResponse {
     private String email;
     private String contact;
     private String password;
-    private String image_path;
+    private String image;
 
     public String getUser_id() {
         return user_id;
@@ -43,6 +43,6 @@ public class UserResponse {
     }
 
     public String getImage_path() {
-        return image_path;
+        return image;
     }
 }
