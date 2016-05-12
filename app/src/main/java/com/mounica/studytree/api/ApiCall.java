@@ -4,6 +4,7 @@ import com.mounica.studytree.api.response.FeedResponse;
 import com.mounica.studytree.api.response.ImageUploadResponse;
 import com.mounica.studytree.api.response.MessageResponse;
 import com.mounica.studytree.api.response.Products;
+import com.mounica.studytree.api.response.TeacherListResponse;
 import com.mounica.studytree.api.response.UserCreatedResponse;
 import com.mounica.studytree.api.response.UserResponse;
 
@@ -49,4 +50,9 @@ public interface ApiCall {
     @POST("/update_subjects.php")
     void updateSubjects(@Field("user_id") int userId, @Field("subject_ids[]") ArrayList<Integer> subjectIds, Callback<MessageResponse> callback);
 
+    @GET("/show_teachers.php")
+    void getTeacherList(@Query("subject_id") int subjectId, Callback<TeacherListResponse> callback);
+
+    @GET("/get_user.php")
+    void getUserById(@Query("user_id") int userId, Callback<UserCreatedResponse> callback);
 }

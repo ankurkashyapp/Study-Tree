@@ -37,6 +37,14 @@
             android:label="Profile"
             android:theme="@style/AppTheme" />
 
+        <activity android:name=".activity.TeachersSubjectsActivity"
+            android:label="Available Teachers"
+            android:theme="@style/AppTheme" />
+
+        <activity android:name=".activity.TeacherProfileView"
+            android:label="Teacher Profile"
+            android:theme="@style/AppTheme" />
+
     </application>
 
 </manifest>

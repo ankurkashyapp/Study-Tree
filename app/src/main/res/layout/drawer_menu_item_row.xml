@@ -4,7 +4,8 @@
     android:layout_height="wrap_content"
     android:background="@color/grey_material_light"
     android:paddingTop="13dp"
-    android:paddingBottom="13dp">
+    android:paddingBottom="13dp"
+    android:id="@+id/drawer_menu_row">
 
     <ImageView
         android:id="@+id/drawer_menu_icon"

@@ -11,6 +11,7 @@ import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -48,7 +49,7 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, DrawerViewAdapter.ProfileEditListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, DrawerViewAdapter.ProfileEditListener, DrawerViewAdapter.MenuItemListener {
 
     private Toolbar toolbar;
     private ActionBarDrawerToggle drawerToggle;
@@ -86,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
-        DrawerViewAdapter adapter = new DrawerViewAdapter(this, this);
+        DrawerViewAdapter adapter = new DrawerViewAdapter(this, this, this);
         recyclerView.setAdapter(adapter);
     }
 
@@ -95,6 +96,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         feedsView.setLayoutManager(layoutManager);
 
+        feedsView.setRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                fillFeedData();
+            }
+        });
+        fillFeedData();
+    }
+
+    private void fillFeedData() {
         Feed.getFeed(this, new Feed.FeedLoaded() {
             @Override
             public void onFeedFound(List<FeedResponse> feedResponse) {
@@ -107,7 +118,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Toast.makeText(MainActivity.this, "No Feed Found", Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
     void setupDrawerToggle(){
@@ -145,5 +155,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onEditProfileClicked() {
         drawerLayout.closeDrawer(Gravity.LEFT);
         startActivity(new Intent(this, ProfileActivity.class));
+    }
+
+    @Override
+    public void onMenuItemClicked(View view) {
+        int clickedPosition = recyclerView.getChildLayoutPosition(view);
+
+        if (clickedPosition == 2) {
+            startActivity(new Intent(this, TeachersSubjectsActivity.class));
+        }
     }
 }

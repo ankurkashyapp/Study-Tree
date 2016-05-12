@@ -50,7 +50,7 @@ public class FeedAdapter extends BaseSwipeAdapter<BaseSwipeAdapter.BaseSwipeable
         feedImageHolder.feedDescription.setText(feed.getDescription());
         feedImageHolder.feedUserName.setText(user.getName());
         feedImageHolder.feedUserRegNo.setText(user.getReg_no());
-        Picasso.with(context).load(imageRootPath+user.getImage_path()).resize(70, 70).centerCrop().into(feedImageHolder.feedUserImage);
+        Picasso.with(context).load(imageRootPath+user.getImage_path()).into(feedImageHolder.feedUserImage);
 
     }
 

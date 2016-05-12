@@ -7,11 +7,13 @@ import android.util.Log;
 import com.mounica.studytree.api.RestClient;
 import com.mounica.studytree.api.response.ImageUploadResponse;
 import com.mounica.studytree.api.response.MessageResponse;
+import com.mounica.studytree.api.response.TeacherListResponse;
 import com.mounica.studytree.api.response.UserCreatedResponse;
 import com.mounica.studytree.api.response.UserResponse;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -108,6 +110,38 @@ public class User {
         });
     }
 
+    public static void getTeacherList(Context context, int subjectId, final TeacherListLoad callback) {
+        RestClient.get().getTeacherList(subjectId, new Callback<TeacherListResponse>() {
+            @Override
+            public void success(TeacherListResponse teacherListResponse, Response response) {
+                String message = teacherListResponse.getMessage();
+                if (!message.equals("Success"))
+                    callback.onTeachersLoadFailure(message);
+                else
+                    callback.onTeachersLoaded(teacherListResponse.getTeachers());
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                callback.onTeachersLoadFailure("Something went wrong. Please try again later");
+            }
+        });
+    }
+
+    public static void getUserById(Context context, int userId, final UserById callback) {
+        RestClient.get().getUserById(userId, new Callback<UserCreatedResponse>() {
+            @Override
+            public void success(UserCreatedResponse userCreatedResponse, Response response) {
+                callback.onUserLoadedSuccess(userCreatedResponse);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                callback.onUserLoadedFailure("Something went wrong. Please try again later");
+            }
+        });
+    }
+
     public static void logout(Context context, final UserLogout callback) {
         SharedPreferences credentials = context.getSharedPreferences(User.USER_CREDENTIALS, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = credentials.edit();
@@ -185,6 +219,16 @@ public class User {
 
     public interface UserSubjectsUpdate {
         void onUpdated(String message);
+    }
+
+    public interface TeacherListLoad {
+        void onTeachersLoaded(List<UserResponse> teachers);
+        void onTeachersLoadFailure(String message);
+    }
+
+    public interface UserById {
+        void onUserLoadedSuccess(UserCreatedResponse userCreatedResponse);
+        void onUserLoadedFailure(String message);
     }
 
 }

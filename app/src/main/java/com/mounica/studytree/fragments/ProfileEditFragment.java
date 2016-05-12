@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mounica.studytree.R;
+import com.mounica.studytree.api.response.UserResponse;
 import com.mounica.studytree.models.Files;
 import com.mounica.studytree.models.User;
 import com.squareup.picasso.Picasso;
@@ -30,6 +31,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
 
 /**
  * Created by ankur on 11/5/16.

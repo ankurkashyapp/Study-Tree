@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mounica.studytree.R;
@@ -30,14 +31,17 @@ public class DrawerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     private Context context;
     private ProfileEditListener profileEditListener;
+    private MenuItemListener menuItemListener;
 
     private int[] menuIcons = {R.drawable.ic_home, R.drawable.ic_appointment, R.drawable.ic_settings, R.drawable.ic_profile, R.drawable.ic_help};
     private String[] menuTitles = {"Home", "Appointment", "Settings", "Update Profile", "Help"};
 
-    public DrawerViewAdapter(Context context, ProfileEditListener profileEditListener) {
+    public DrawerViewAdapter(Context context, ProfileEditListener profileEditListener, MenuItemListener menuItemListener) {
         this.context = context;
         this.profileEditListener = profileEditListener;
+        this.menuItemListener = menuItemListener;
     }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View headerView = LayoutInflater.from(parent.getContext()).inflate(R.layout.drawer_header, parent, false);
@@ -46,7 +50,7 @@ public class DrawerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         if (viewType == TYPE_HEADER)
             return new HeaderViewHolder(headerView, profileEditListener);
 
-        return new MenuItemHolder(menuItemsView);
+        return new MenuItemHolder(menuItemsView, menuItemListener);
 
     }
 
@@ -106,17 +110,30 @@ public class DrawerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     public class MenuItemHolder extends RecyclerView.ViewHolder {
 
+        RelativeLayout menuRow;
         ImageView menuIcon;
         TextView menuTitle;
 
-        public MenuItemHolder(View itemView) {
+        public MenuItemHolder(final View itemView, final MenuItemListener menuItemListener) {
             super(itemView);
+            menuRow = (RelativeLayout)itemView.findViewById(R.id.drawer_menu_row);
             menuIcon = (ImageView)itemView.findViewById(R.id.drawer_menu_icon);
             menuTitle = (TextView) itemView.findViewById(R.id.drawer_menu_title);
+
+            menuRow.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    menuItemListener.onMenuItemClicked(itemView);
+                }
+            });
         }
     }
 
     public interface ProfileEditListener {
         void onEditProfileClicked();
+    }
+
+    public interface MenuItemListener {
+        void onMenuItemClicked(View view);
     }
 }

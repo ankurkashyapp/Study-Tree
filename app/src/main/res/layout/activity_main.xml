@@ -28,7 +28,8 @@
             app:layout_empty="@layout/feed_view_empty"
             android:background="@color/grey_material_dark"
             android:paddingLeft="3dp"
-            android:paddingRight="3dp"/>
+            android:paddingRight="3dp"
+            android:paddingTop="5dp"/>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/upload_image"
