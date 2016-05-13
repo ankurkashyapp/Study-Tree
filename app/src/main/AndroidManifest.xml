@@ -35,7 +35,8 @@
 
         <activity android:name=".activity.ProfileActivity"
             android:label="Profile"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
 
         <activity android:name=".activity.TeachersSubjectsActivity"
             android:label="Available Teachers"

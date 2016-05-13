@@ -114,7 +114,7 @@ public class TeacherProfileFragment extends Fragment {
     }
 
     private void fillSubject() {
-        int i;
+        int i, j=0;
         LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         layoutParams2.setMargins(20, 0, 0, 0);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -125,14 +125,14 @@ public class TeacherProfileFragment extends Fragment {
             linearLayout2.setOrientation(LinearLayout.HORIZONTAL);
             linearLayout2.setLayoutParams(layoutParams);
             TextView textView = new TextView(getActivity());
-            textView.setText(subjectsList.get(i).getSubject_name());
+            textView.setText(subjectsList.get(j).getSubject_name());
             textView.setTextColor(ContextCompat.getColor(getActivity(), R.color.white));
             textView.setGravity(Gravity.CENTER);
             textView.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.black_transparent_light));
             textView.setPadding(15, 5, 15, 5);
-
+            j++;
             TextView textView2 = new TextView(getActivity());
-            textView2.setText(subjectsList.get(i+1).getSubject_name());
+            textView2.setText(subjectsList.get(j).getSubject_name());
             textView2.setTextColor(ContextCompat.getColor(getActivity(), R.color.white));
             textView2.setGravity(Gravity.CENTER);
             textView2.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.black_transparent_light));
@@ -144,11 +144,12 @@ public class TeacherProfileFragment extends Fragment {
             linearLayout2.addView(textView2);
 
             linearLayout.addView(linearLayout2);
+            j++;
         }
 
         if (subjectsList.size() % 2  != 0) {
             TextView textView3 = new TextView(getActivity());
-            textView3.setText(subjectsList.get(i).getSubject_name());
+            textView3.setText(subjectsList.get(j).getSubject_name());
             textView3.setTextColor(ContextCompat.getColor(getActivity(), R.color.white));
             textView3.setGravity(Gravity.CENTER);
             textView3.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.black_transparent_light));
