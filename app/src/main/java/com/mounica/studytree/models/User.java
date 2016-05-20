@@ -1,5 +1,6 @@
 package com.mounica.studytree.models;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
@@ -23,7 +24,7 @@ import retrofit.mime.TypedFile;
 /**
  * Created by ankur on 5/5/16.
  */
-public class User {
+public class User{
 
     public static final String USER_CREDENTIALS = "userCredentials";
     public static final String USER_ID = "userId";
@@ -196,6 +197,7 @@ public class User {
         SharedPreferences credentials = context.getSharedPreferences(USER_CREDENTIALS, Context.MODE_PRIVATE);
         return credentials.getString(USER_IMAGE_LINK, USER_DEFAULT_IMAGE_LINK);
     }
+
 
     public interface UserCreated {
         void onUserCreated(UserResponse userResponse);

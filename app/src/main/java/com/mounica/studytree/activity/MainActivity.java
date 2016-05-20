@@ -102,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 fillFeedData();
             }
         });
+
         fillFeedData();
     }
 
@@ -120,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
-    void setupDrawerToggle(){
+    void setupDrawerToggle() {
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.app_name, R.string.app_name);
         drawerToggle.syncState();
     }

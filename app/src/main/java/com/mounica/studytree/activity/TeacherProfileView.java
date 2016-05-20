@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import com.mounica.studytree.R;
 import com.mounica.studytree.fragments.ProfileEditFragment;
 import com.mounica.studytree.fragments.SubjectsTeachFragment;
+import com.mounica.studytree.fragments.TeacherAppointmentFragment;
 import com.mounica.studytree.fragments.TeacherProfileFragment;
 
 /**
@@ -63,7 +64,7 @@ public class TeacherProfileView extends AppCompatActivity implements TabLayout.O
             replaceFragment(TeacherProfileFragment.newInstance(userId));
         }
         else if (tab.getPosition() == 1) {
-            replaceFragment(TeacherProfileFragment.newInstance(userId));
+            replaceFragment(TeacherAppointmentFragment.newInstance());
         }
     }
 
