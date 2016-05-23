@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        android:elevation="10dp"/>
+
+
+    <com.malinskiy.superrecyclerview.SuperRecyclerView
+        android:id="@+id/comments_list"
+        android:layout_below="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:mainLayoutId="@layout/layout_recyclerview_verticalscroll"
+        app:layout_empty="@layout/feed_view_empty"
+        android:background="@color/grey_material_dark"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        android:paddingTop="5dp"
+        android:layout_above="@+id/comment_create_group"/>
+
+    <LinearLayout
+        android:id="@+id/comment_create_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:background="@color/grey_material_dark">
+
+        <EditText
+            android:id="@+id/comment_create"
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:drawableLeft="@drawable/ic_reg_no"
+            android:drawablePadding="10dp"
+            android:background="@color/black_transparent_light"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:hint="Enter your comment here"
+            android:textColorHint="@color/white_transparent"/>
+
+        <Button
+            android:id="@+id/submit_comment"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:background="@drawable/selector_blue_normal"
+            android:layout_gravity="center"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

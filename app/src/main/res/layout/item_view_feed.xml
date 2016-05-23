@@ -93,6 +93,7 @@
             android:layout_marginTop="5dp">
 
             <RelativeLayout
+                android:id="@+id/feed_comment"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -120,6 +121,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/feed_download_file"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

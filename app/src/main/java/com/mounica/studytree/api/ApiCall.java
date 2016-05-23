@@ -1,6 +1,7 @@
 package com.mounica.studytree.api;
 
 import com.mounica.studytree.api.response.FeedResponse;
+import com.mounica.studytree.api.response.GetCommentResponse;
 import com.mounica.studytree.api.response.ImageUploadResponse;
 import com.mounica.studytree.api.response.MessageResponse;
 import com.mounica.studytree.api.response.Products;
@@ -55,4 +56,11 @@ public interface ApiCall {
 
     @GET("/get_user.php")
     void getUserById(@Query("user_id") int userId, Callback<UserCreatedResponse> callback);
+
+    @FormUrlEncoded
+    @POST("/post_comment.php")
+    void postComment(@Field("feed_id") int feedId, @Field("user_id") int userId, @Field("comment") String comment, Callback<GetCommentResponse> callback);
+
+    @GET("/get_comments.php")
+    void getComments(@Query("feed_id") int feedId, Callback<GetCommentResponse> callback);
 }

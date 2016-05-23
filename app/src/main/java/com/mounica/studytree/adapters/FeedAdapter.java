@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.malinskiy.superrecyclerview.swipe.BaseSwipeAdapter;
@@ -25,15 +26,20 @@ public class FeedAdapter extends BaseSwipeAdapter<BaseSwipeAdapter.BaseSwipeable
     private Context context;
     private List<FeedResponse> feedResponse;
 
-    public FeedAdapter(Context context, List<FeedResponse> feedResponse) {
+    private DownloadListener downloadListener;
+    private CommentClickListener commentClickListener;
+
+    public FeedAdapter(Context context, List<FeedResponse> feedResponse, DownloadListener downloadListener, CommentClickListener commentClickListener) {
         this.context = context;
         this.feedResponse = feedResponse;
+        this.downloadListener = downloadListener;
+        this.commentClickListener = commentClickListener;
     }
 
     @Override
     public BaseSwipeableViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View feedImage = LayoutInflater.from(context).inflate(R.layout.item_view_feed, parent, false);
-        return new FeedImageHolder(feedImage);
+        return new FeedImageHolder(feedImage, downloadListener, commentClickListener);
     }
 
     @Override
@@ -73,7 +79,10 @@ public class FeedAdapter extends BaseSwipeAdapter<BaseSwipeAdapter.BaseSwipeable
         public TextView feedUserRegNo;
         public ImageView feedUserImage;
 
-        public FeedImageHolder(View itemView) {
+        public RelativeLayout feedDownloadFile;
+        public RelativeLayout feedComment;
+
+        public FeedImageHolder(final View itemView, final DownloadListener downloadListener, final CommentClickListener commentClickListener) {
             super(itemView);
             feedImage = (ImageView)itemView.findViewById(R.id.feed_image);
             feedTitle = (TextView)itemView.findViewById(R.id.feed_image_title);
@@ -81,8 +90,31 @@ public class FeedAdapter extends BaseSwipeAdapter<BaseSwipeAdapter.BaseSwipeable
             feedUserName = (TextView)itemView.findViewById(R.id.feed_user_name);
             feedUserRegNo = (TextView)itemView.findViewById(R.id.feed_user_reg_no);
             feedUserImage = (ImageView) itemView.findViewById(R.id.feed_user_image);
+            feedComment = (RelativeLayout)itemView.findViewById(R.id.feed_comment);
+            feedDownloadFile = (RelativeLayout)itemView.findViewById(R.id.feed_download_file);
 
+
+            feedComment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    commentClickListener.onCommentClicked(itemView);
+                }
+            });
+            feedDownloadFile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    downloadListener.onDownloadClicked(itemView);
+                }
+            });
         }
 
+    }
+
+    public interface DownloadListener {
+        void onDownloadClicked(View itemView);
+    }
+
+    public interface CommentClickListener {
+        void onCommentClicked(View itemView);
     }
 }

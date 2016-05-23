@@ -64,7 +64,7 @@ public class TeacherProfileView extends AppCompatActivity implements TabLayout.O
             replaceFragment(TeacherProfileFragment.newInstance(userId));
         }
         else if (tab.getPosition() == 1) {
-            replaceFragment(TeacherAppointmentFragment.newInstance());
+            replaceFragment(TeacherAppointmentFragment.newInstance(userId));
         }
     }
 
