@@ -167,6 +167,9 @@ public class TeacherAppointmentFragment extends Fragment implements View.OnClick
     }
 
     private Session createSessionObject() {
+
+        final String email = getResources().getString(R.string.email);
+        final String pass = getResources().getString(R.string.pass);
         Properties properties = new Properties();
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
@@ -175,7 +178,8 @@ public class TeacherAppointmentFragment extends Fragment implements View.OnClick
 
         return Session.getInstance(properties, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("shiv.ankurkashyap@hotmail.com", "Kashyap)(021994");
+                return new PasswordAuthentication(email, pass);
+
             }
         });
     }

@@ -63,7 +63,6 @@ public class CommentsActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View view) {
         if (view == submitComment) {
-            createComment.setText(null);
             postComment();
         }
     }
@@ -97,6 +96,7 @@ public class CommentsActivity extends AppCompatActivity implements View.OnClickL
             public void onCommentsLoaded(List<CommentsResponse> commentsResponse) {
                 CommentsAdapter commentsAdapter = new CommentsAdapter(CommentsActivity.this, commentsResponse);
                 commentsView.setAdapter(commentsAdapter);
+                createComment.setText(null);
             }
 
             @Override
@@ -105,6 +105,7 @@ public class CommentsActivity extends AppCompatActivity implements View.OnClickL
                 List<CommentsResponse> commentsResponse = new ArrayList<CommentsResponse>();
                 CommentsAdapter commentsAdapter = new CommentsAdapter(CommentsActivity.this, commentsResponse);
                 commentsView.setAdapter(commentsAdapter);
+                createComment.setText(null);
             }
         });
     }

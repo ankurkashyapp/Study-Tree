@@ -1,6 +1,7 @@
 package com.mounica.studytree.models;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.mounica.studytree.api.RestClient;
 import com.mounica.studytree.api.response.CommentsResponse;
@@ -18,6 +19,7 @@ import retrofit.client.Response;
 public class Comments {
 
     public static void postComments(Context context, int feedId, int userId, String comment, final CommentsLoadListener callback) {
+        Log.e("Comments", comment);
         RestClient.get().postComment(feedId, userId, comment, new Callback<GetCommentResponse>() {
             @Override
             public void success(GetCommentResponse getCommentResponse, Response response) {
