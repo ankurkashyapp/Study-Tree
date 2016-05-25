@@ -25,6 +25,7 @@ import com.mounica.studytree.R;
 import com.mounica.studytree.api.response.UserResponse;
 import com.mounica.studytree.models.Files;
 import com.mounica.studytree.models.User;
+import com.mounica.studytree.utilities.ValidationTools;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -49,6 +50,13 @@ public class ProfileEditFragment extends Fragment implements View.OnClickListene
     private EditText editUserContact;
     private EditText editUserPwd;
     private EditText editUserPwdConfirm;
+
+    private String registerName;
+    private String registerAge;
+    private String registerEmail;
+    private String registerContact;
+    private String registerPassword;
+    private String registerConfirmPassword;
 
     private Button userChangePic;
     private Button submitUpdateProfile;
@@ -123,8 +131,71 @@ public class ProfileEditFragment extends Fragment implements View.OnClickListene
             selectImage();
         }
         else if (view == submitUpdateProfile) {
-
+            if (isValidated()) {
+                updateProfile();
+            }
         }
+    }
+
+    private void updateProfile() {
+        showProgressDialog("Updating. Please wait..");
+        User.updateUser(getActivity(), Integer.parseInt(User.getLoggedInUserRegNo(getActivity())), registerName, Integer.parseInt(registerAge), registerEmail, registerContact, registerPassword, new User.UserUpdated() {
+
+            @Override
+            public void onUserUpdated(UserResponse userResponse) {
+                Toast.makeText(getActivity(),"Profile has been updated ", Toast.LENGTH_SHORT).show();
+                hideProgressDialog();
+                User.saveLoggedInUserData(getActivity(), userResponse);
+                fillUserData();
+            }
+
+            @Override
+            public void onUserNotUpdated(String message) {
+                hideProgressDialog();
+            }
+        });
+    }
+
+    private boolean isValidated() {
+        registerName = editUserName.getText().toString();
+        registerAge = editUserAge.getText().toString();
+        registerEmail = editUserEmail.getText().toString();
+        registerContact = editUserContact.getText().toString();
+        registerPassword = editUserPwd.getText().toString();
+        registerConfirmPassword = editUserPwdConfirm.getText().toString();
+
+        if (!ValidationTools.isValidName(registerName)) {
+            editUserName.setError("Enter a valid name");
+            return false;
+        }
+
+        if (!ValidationTools.isValidAge(registerAge)) {
+            editUserAge.setError("Enter a valid age");
+            return false;
+        }
+
+        if (!ValidationTools.isValidEmail(registerEmail)) {
+            editUserEmail.setError("Enter a valid email address");
+            return false;
+        }
+
+        if (!ValidationTools.isValidContact(registerContact)) {
+            editUserContact.setError("Enter a valid contact number (at least 10 digits)");
+            return false;
+        }
+
+        if (!ValidationTools.isValidPassword(registerPassword)) {
+            editUserPwd.setError("At least 6 characters");
+            return false;
+        }
+
+        if (!registerPassword.equals(registerConfirmPassword)) {
+            editUserPwd.setError("Both passwords should match each other");
+            editUserPwdConfirm.setError("Both passwords should match each other");
+            return false;
+        }
+
+        return true;
     }
 
     private void selectImage() {

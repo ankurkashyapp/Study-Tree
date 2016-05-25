@@ -92,7 +92,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
             User.loginUser(getActivity(), Integer.parseInt(loginRegNo), loginPassword, new User.UserLogin() {
                 @Override
                 public void onUserLoginSuccess(UserResponse userResponse) {
-                    saveLoggedInUserData(userResponse);
+                    User.saveLoggedInUserData(getActivity(), userResponse);
                     Toast.makeText(getActivity(), "Successfully logged In", Toast.LENGTH_SHORT).show();
                     hideProgressDialog();
                     startActivity(new Intent(getActivity(), MainActivity.class));
@@ -106,19 +106,5 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
                 }
             });
         }
-    }
-
-    private void saveLoggedInUserData(UserResponse userResponse) {
-        SharedPreferences credentials = getActivity().getSharedPreferences(User.USER_CREDENTIALS, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = credentials.edit();
-        editor.putInt(User.USER_ID, Integer.parseInt(userResponse.getUser_id()));
-        editor.putString(User.USER_REG_NO, userResponse.getReg_no());
-        editor.putString(User.USER_NAME, userResponse.getName());
-        editor.putString(User.USER_AGE, userResponse.getAge());
-        editor.putString(User.USER_EMAIL, userResponse.getEmail());
-        editor.putString(User.USER_CONTACT, userResponse.getContact());
-        editor.putString(User.USER_PASSWORD, userResponse.getPassword());
-        editor.putString(User.USER_IMAGE_LINK, userResponse.getImage_path());
-        editor.commit();
     }
 }

@@ -97,6 +97,20 @@ public class User{
         });
     }
 
+    public static void updateUser(Context context, int regNo, String name, int age, String email, String contact, String password, final UserUpdated callback) {
+        RestClient.get().updateUser(regNo, name, age, email, contact, password, new Callback<UserCreatedResponse>() {
+            @Override
+            public void success(UserCreatedResponse userCreatedResponse, Response response) {
+                callback.onUserUpdated(userCreatedResponse.getUser());
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                callback.onUserNotUpdated("Something went wrong. Please try again later.");
+            }
+        });
+    }
+
     public static void updateSubjects(Context context, ArrayList<Integer> subjectIds, final UserSubjectsUpdate callback) {
         RestClient.get().updateSubjects(User.getLoggedInUserId(context), subjectIds, new Callback<MessageResponse>() {
             @Override
@@ -158,6 +172,20 @@ public class User{
         callback.onLogoutSuccess();
     }
 
+    public static void saveLoggedInUserData(Context context, UserResponse userResponse) {
+        SharedPreferences credentials = context.getSharedPreferences(User.USER_CREDENTIALS, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = credentials.edit();
+        editor.putInt(User.USER_ID, Integer.parseInt(userResponse.getUser_id()));
+        editor.putString(User.USER_REG_NO, userResponse.getReg_no());
+        editor.putString(User.USER_NAME, userResponse.getName());
+        editor.putString(User.USER_AGE, userResponse.getAge());
+        editor.putString(User.USER_EMAIL, userResponse.getEmail());
+        editor.putString(User.USER_CONTACT, userResponse.getContact());
+        editor.putString(User.USER_PASSWORD, userResponse.getPassword());
+        editor.putString(User.USER_IMAGE_LINK, userResponse.getImage_path());
+        editor.commit();
+    }
+
     public static int getLoggedInUserId(Context c) {
         SharedPreferences credentials = c.getSharedPreferences(USER_CREDENTIALS, Context.MODE_PRIVATE);
         return credentials.getInt(USER_ID, -1);
@@ -217,6 +245,11 @@ public class User{
     public interface UserProfilePicUpdate {
         void onUpdatedSuccess(String path);
         void onUpdatedFailure(String message);
+    }
+
+    public interface UserUpdated {
+        void onUserUpdated(UserResponse userResponse);
+        void onUserNotUpdated(String message);
     }
 
     public interface UserSubjectsUpdate {

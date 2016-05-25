@@ -63,4 +63,7 @@ public interface ApiCall {
 
     @GET("/get_comments.php")
     void getComments(@Query("feed_id") int feedId, Callback<GetCommentResponse> callback);
+
+    @GET("/update_user.php")
+    void updateUser(@Query("reg_no") int regNo, @Query("name") String name, @Query("age") int age, @Query("email") String email, @Query("contact") String contact, @Query("password") String password, Callback<UserCreatedResponse> callback);
 }
